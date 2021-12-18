@@ -8,9 +8,6 @@ class gear_parameters:
         self.u = u
         self.module = module
 
-
-
-
 gear_data_input = open("gears_entry_parameters.txt" , "w")
 gear_data_output = open("gears_calculated.txt", "w")
 print ("Input your z1, beta, and atw")
@@ -27,15 +24,12 @@ def calc_alfa_t(z1, beta):
     alfa_t_radians = trig.atan(tan_alfa_t)
     return alfa_t_radians
 
-
 def a_t_min_max (a_tw, alfa_t_radians):
     alfa_t_max = trig.radians(25)
     alfa_t_min = trig.radians(22)
     a_t_min = (a_tw*trig.cos(alfa_t_max)/trig.cos(alfa_t_radians))
     a_t_max = (a_tw*trig.cos(alfa_t_min)/trig.cos(alfa_t_radians))
     return a_t_max, a_t_min
-
-
 
 def module_min_max (transmission_ratio, max_distance, min_distance, teeth1, teeth2, beta):
     possible_modules = [1, 1.25, 1.5, 2, 2.5, 3, 4, 5, 6, 8, 10, 1.125, 1.375, 1.75, 2.25, 2.75, 3.5, 4.5, 5.5, 7.5, 9]
@@ -53,12 +47,8 @@ alfa_t_radians = calc_alfa_t(z1, int(beta))
 a_t_min_max(int(a_tw), alfa_t_radians)
 max_distance_module, min_distance_module = a_t_min_max(int(a_tw), alfa_t_radians)
 
-
-
-
 u_h = float(input("Enter your theoretical gear transmission ratio: "))
 u_ba = float(input("Enter your real belt transmission ratio: "))
-
 
 theoretical_trans_ratio = float(input("Enter your theoretical overall transmission ratio: "))
 z2_start = z1*u_h
@@ -69,10 +59,6 @@ real_trans_ratio = (z2_current*u_ba)/z1
 
 error = (real_trans_ratio-theoretical_trans_ratio)/theoretical_trans_ratio
 error2 = (real_trans_ratio-theoretical_trans_ratio)/theoretical_trans_ratio
-
-
-
-
 
 while z2_current<300000:
     real_trans_ratio = (z2_current*u_ba)/z1
@@ -89,17 +75,4 @@ while z2_current_minus>0:
     if abs(error2) <= 0.04:
         module_min_max(gear_trans_ratio, max_distance_module, min_distance_module, z1, z2_current_minus, beta)
     z2_current_minus -= 1
-
-
-
-
-
-
-
-
-
     
-    
-
-    
-
